@@ -1,30 +1,87 @@
-# PDF to Image
+# PDF to Image Converter
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+A modern, fast, and secure PDF to image converter built with Next.js and HeroUI. Convert your PDF files to high-quality images instantly in your browser.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/wengxiaoxiongs-projects/v0-pdf-to-image)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/UrntsdzPtSd)
+## 🌟 Features
 
-## Overview
+- **Client-side Processing**: All conversion happens in your browser - your files never leave your device
+- **High Quality**: Convert PDFs to high-resolution PNG images
+- **Modern UI**: Beautiful, responsive interface built with HeroUI components
+- **Drag & Drop**: Easy file upload with drag and drop support
+- **Batch Download**: Download all converted images at once
+- **Custom Download Path**: Set custom download folder names
+- **Dark Mode**: Full dark mode support
+- **Mobile Friendly**: Responsive design that works on all devices
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## 🚀 Live Demo
 
-## Deployment
+**Product URL: [pdf.bear-agent.com](https://pdf.bear-agent.com)**
 
-Your project is live at:
+## 🛠️ Technology Stack
 
-**[https://vercel.com/wengxiaoxiongs-projects/v0-pdf-to-image](https://vercel.com/wengxiaoxiongs-projects/v0-pdf-to-image)**
+- **Frontend**: Next.js 14, React 18, TypeScript
+- **UI Library**: HeroUI (NextUI)
+- **Styling**: Tailwind CSS
+- **PDF Processing**: PDF.js
+- **Icons**: Lucide React
+- **Deployment**: Vercel
 
-## Build your app
+## 📦 Installation
 
-Continue building your app on:
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd pdf-to-image-converter
+```
 
-**[https://v0.app/chat/projects/UrntsdzPtSd](https://v0.app/chat/projects/UrntsdzPtSd)**
+2. Install dependencies:
+```bash
+npm install
+# or
+pnpm install
+```
 
-## How It Works
+3. Run the development server:
+```bash
+npm run dev
+# or
+pnpm dev
+```
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🎯 Usage
+
+1. **Upload PDF**: Drag and drop your PDF file or click to browse
+2. **Wait for Processing**: The app will convert each page to an image
+3. **Download**: Download individual images or all at once
+4. **Settings**: Configure download preferences in the settings modal
+
+## 🔧 Configuration
+
+### Download Settings
+- Set custom download folder names
+- Configure file naming preferences
+- All settings are saved in browser localStorage
+
+### File Limits
+- Maximum file size: 50MB
+- Supported format: PDF only
+- Output format: PNG images
+
+## 🌐 Friendship Links
+
+- [wengxiaoxiong.com](https://wengxiaoxiong.com)
+- [bear-agent.com](https://bear-agent.com)
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Support
+
+If you have any questions or need help, please open an issue on GitHub.
