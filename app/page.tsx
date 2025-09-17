@@ -7,7 +7,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Upload, Download, FileText, ImageIcon, AlertCircle, CheckCircle2, Link, Settings } from "lucide-react"
+import { Upload, Download, FileText, ImageIcon, AlertCircle, CheckCircle2, Link, Settings, Archive } from "lucide-react"
+import JSZip from "jszip"
 // HeroUI components temporarily disabled due to import issues
 // import { 
 //   Button as HeroButton, 
@@ -185,7 +186,41 @@ export default function PDFToImageConverter() {
     document.body.removeChild(link)
   }, [downloadPath])
 
-  // Download all images as ZIP (simplified - downloads individually)
+  // Download all images as ZIP
+  const downloadAllImagesAsZip = useCallback(async () => {
+    if (convertedImages.length === 0) return
+
+    try {
+      const zip = new JSZip()
+      const folderName = downloadPath || fileName || 'pdf_images'
+      
+      // Add each image to the ZIP
+      convertedImages.forEach((image) => {
+        // Convert data URL to blob
+        const base64Data = image.dataUrl.split(',')[1]
+        zip.file(image.filename, base64Data, { base64: true })
+      })
+
+      // Generate ZIP file
+      const zipBlob = await zip.generateAsync({ type: 'blob' })
+      
+      // Create download link
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(zipBlob)
+      link.download = `${folderName}.zip`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      
+      // Clean up the object URL
+      URL.revokeObjectURL(link.href)
+    } catch (error) {
+      setError('Failed to create ZIP file. Please try downloading images individually.')
+      console.error('ZIP creation error:', error)
+    }
+  }, [convertedImages, downloadPath, fileName])
+
+  // Download all images individually (legacy function)
   const downloadAllImages = useCallback(() => {
     convertedImages.forEach((image, index) => {
       setTimeout(() => {
@@ -330,14 +365,24 @@ export default function PDFToImageConverter() {
                   <CheckCircle2 className="w-6 h-6 text-green-500" />
                   <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Conversion Complete</h3>
                 </div>
-                <Button 
-                  size="lg"
-                  onClick={downloadAllImages} 
-                  className="bg-gradient-to-r from-green-500 to-green-600 text-white border-0 hover:from-green-600 hover:to-green-700"
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download All ({convertedImages.length})
-                </Button>
+                <div className="flex gap-3">
+                  <Button 
+                    size="lg"
+                    onClick={downloadAllImagesAsZip} 
+                    className="bg-gradient-to-r from-purple-500 to-purple-600 text-white border-0 hover:from-purple-600 hover:to-purple-700"
+                  >
+                    <Archive className="w-5 h-5 mr-2" />
+                    Download ZIP
+                  </Button>
+                  <Button 
+                    size="lg"
+                    onClick={downloadAllImages} 
+                    className="bg-gradient-to-r from-green-500 to-green-600 text-white border-0 hover:from-green-600 hover:to-green-700"
+                  >
+                    <Download className="w-5 h-5 mr-2" />
+                    Download All ({convertedImages.length})
+                  </Button>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -454,6 +499,12 @@ export default function PDFToImageConverter() {
                     <strong>Note:</strong> Due to browser security restrictions, we cannot directly set the download location. 
                     The path you specify will be used as a prefix for the filename. 
                     You can change your browser's default download location in your browser settings.
+                  </p>
+                </div>
+                <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+                  <p className="text-sm text-purple-800 dark:text-purple-200">
+                    <strong>ZIP Download:</strong> Use the "Download ZIP" button to download all images as a single compressed file. 
+                    This is more convenient for multiple images and saves bandwidth.
                   </p>
                 </div>
               </div>
