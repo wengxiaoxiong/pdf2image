@@ -30,8 +30,8 @@ A modern, fast, and secure PDF to image converter built with Next.js and HeroUI.
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd pdf-to-image-converter
+git clone https://github.com/wengxiaoxiong/pdf2image.git
+cd pdf2image
 ```
 
 2. Install dependencies:
