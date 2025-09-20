@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useCallback } from 'react'
-import { useTranslations } from 'next-intl'
+// import { useTranslations } from 'next-intl'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
@@ -27,7 +27,29 @@ export default function OCRTextExtractor({
   pageNumber, 
   onTextExtracted 
 }: OCRTextExtractorProps) {
-  const t = useTranslations()
+  // const t = useTranslations()
+  const t = (key: string, params?: any) => {
+    // Simple fallback for testing
+    const translations: Record<string, string> = {
+      'ocr.extractText': 'Extract Text',
+      'ocr.extracting': 'Recognizing...',
+      'ocr.extractedText': 'Extracted text from page {number}',
+      'ocr.characterCount': 'Characters: {count}',
+      'ocr.clear': 'Clear',
+      'ocr.copy': 'Copy text',
+      'ocr.copied': 'Copied',
+      'ocr.showText': 'Show text',
+      'ocr.hideText': 'Hide text',
+      'errors.ocrFailed': 'Text extraction failed, please try again'
+    }
+    let result = translations[key] || key
+    if (params) {
+      Object.keys(params).forEach(param => {
+        result = result.replace(`{${param}}`, params[param])
+      })
+    }
+    return result
+  }
   const [isExtracting, setIsExtracting] = useState(false)
   const [extractedText, setExtractedText] = useState<string>('')
   const [error, setError] = useState<string | null>(null)

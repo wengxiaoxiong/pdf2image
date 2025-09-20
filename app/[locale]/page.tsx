@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useCallback, useRef, useEffect } from "react"
-import { useTranslations } from 'next-intl'
+// import { useTranslations } from 'next-intl'
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
@@ -42,7 +42,63 @@ interface ConvertedImage {
 }
 
 export default function PDFToImageConverter() {
-  const t = useTranslations()
+  // const t = useTranslations()
+  const t = (key: string, params?: any) => {
+    // Simple fallback for testing
+    const translations: Record<string, string> = {
+      'title': 'PDF to Image Converter',
+      'subtitle': 'Convert your PDF files to high-quality images instantly.',
+      'toolName': 'PDF Converter Tool',
+      'downloadSettings': 'Download Settings',
+      'saveTo': 'Save to: {path}',
+      'dragDropText': 'Drag & drop your PDF here',
+      'dropText': 'Drop your PDF here',
+      'orClickToBrowse': 'or click to browse files',
+      'selectPdfFile': 'Select PDF File',
+      'supportsPdf': 'Supports PDF files up to 50MB',
+      'converting': 'Converting your PDF to images...',
+      'complete': 'complete',
+      'conversionComplete': 'Conversion Complete',
+      'downloadZip': 'Download ZIP',
+      'downloadAll': 'Download All ({count})',
+      'download': 'Download',
+      'page': 'Page {number}',
+      'friendshipLinks': '友情链接 / Friendship Links',
+      'footerText': 'Your files are processed locally in your browser.',
+      'downloadSettingsTitle': 'Download Settings',
+      'downloadPathLabel': 'Download Path (Optional)',
+      'downloadPathPlaceholder': 'Enter folder name for downloads',
+      'downloadPathHelp': 'This will be used as a prefix for downloaded file names',
+      'downloadPathNote': 'Note: Due to browser security restrictions, we cannot directly set the download location.',
+      'zipDownloadNote': 'ZIP Download: Use the "Download ZIP" button to download all images as a single compressed file.',
+      'cancel': 'Cancel',
+      'saveSettings': 'Save Settings',
+      'errors.invalidPdf': 'Please select a valid PDF file.',
+      'errors.fileTooLarge': 'File size must be less than 50MB.',
+      'errors.conversionFailed': 'Failed to convert PDF. Please ensure the file is a valid PDF.',
+      'errors.zipCreationFailed': 'Failed to create ZIP file. Please try downloading images individually.',
+      'errors.ocrFailed': 'Text extraction failed, please try again',
+      'ocr.extractText': 'Extract Text',
+      'ocr.extracting': 'Recognizing...',
+      'ocr.extractedText': 'Extracted text from page {number}',
+      'ocr.characterCount': 'Characters: {count}',
+      'ocr.clear': 'Clear',
+      'ocr.copy': 'Copy text',
+      'ocr.copied': 'Copied',
+      'ocr.showText': 'Show text',
+      'ocr.hideText': 'Hide text',
+      'language': 'Language',
+      'english': 'English',
+      'chinese': '中文'
+    }
+    let result = translations[key] || key
+    if (params) {
+      Object.keys(params).forEach(param => {
+        result = result.replace(`{${param}}`, params[param])
+      })
+    }
+    return result
+  }
   const [isDragOver, setIsDragOver] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [progress, setProgress] = useState(0)
