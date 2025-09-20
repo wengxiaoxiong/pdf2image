@@ -30,7 +30,19 @@
     "invalidPdf": "请选择有效的PDF文件。",
     "fileTooLarge": "文件大小必须小于50MB。",
     "conversionFailed": "PDF转换失败。请确保文件是有效的PDF。",
-    "zipCreationFailed": "创建ZIP文件失败。请尝试单独下载图片。"
+    "zipCreationFailed": "创建ZIP文件失败。请尝试单独下载图片。",
+    "ocrFailed": "文字提取失败，请重试"
+  },
+  "ocr": {
+    "extractText": "提取文字",
+    "extracting": "识别中...",
+    "extractedText": "第{number}页提取的文字",
+    "characterCount": "字符数: {count}",
+    "clear": "清除",
+    "copy": "复制文字",
+    "copied": "已复制",
+    "showText": "显示文字",
+    "hideText": "隐藏文字"
   },
   "language": "语言",
   "english": "English",

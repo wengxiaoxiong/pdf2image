@@ -11,6 +11,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Upload, Download, FileText, ImageIcon, AlertCircle, CheckCircle2, Link, Settings, Archive } from "lucide-react"
 import JSZip from "jszip"
 import LanguageSwitcher from "@/components/language-switcher"
+import OCRTextExtractor from "@/components/ocr-text-extractor"
 // HeroUI components temporarily disabled due to import issues
 // import { 
 //   Button as HeroButton, 
@@ -403,20 +404,28 @@ export default function PDFToImageConverter() {
                         className="max-w-full max-h-full object-contain"
                       />
                     </div>
-                    <div className="p-4 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <ImageIcon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                        <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t('page', { number: image.pageNumber })}</span>
+                    <div className="p-4 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <ImageIcon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                          <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t('page', { number: image.pageNumber })}</span>
+                        </div>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => downloadImage(image)}
+                          className="opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600"
+                        >
+                          <Download className="w-4 h-4 mr-1" />
+                          {t('download')}
+                        </Button>
                       </div>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => downloadImage(image)}
-                        className="opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600"
-                      >
-                        <Download className="w-4 h-4 mr-1" />
-                        {t('download')}
-                      </Button>
+                      
+                      {/* OCR 文字提取功能 */}
+                      <OCRTextExtractor 
+                        imageDataUrl={image.dataUrl}
+                        pageNumber={image.pageNumber}
+                      />
                     </div>
                   </div>
                 ))}

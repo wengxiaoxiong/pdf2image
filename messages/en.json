@@ -30,7 +30,19 @@
     "invalidPdf": "Please select a valid PDF file.",
     "fileTooLarge": "File size must be less than 50MB.",
     "conversionFailed": "Failed to convert PDF. Please ensure the file is a valid PDF.",
-    "zipCreationFailed": "Failed to create ZIP file. Please try downloading images individually."
+    "zipCreationFailed": "Failed to create ZIP file. Please try downloading images individually.",
+    "ocrFailed": "Text extraction failed, please try again"
+  },
+  "ocr": {
+    "extractText": "Extract Text",
+    "extracting": "Recognizing...",
+    "extractedText": "Extracted text from page {number}",
+    "characterCount": "Characters: {count}",
+    "clear": "Clear",
+    "copy": "Copy text",
+    "copied": "Copied",
+    "showText": "Show text",
+    "hideText": "Hide text"
   },
   "language": "Language",
   "english": "English",
