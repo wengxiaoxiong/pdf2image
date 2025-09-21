@@ -17,28 +17,14 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({
-  children,
-  params: { locale }
+  children
 }: Readonly<{
   children: React.ReactNode
-  params: { locale: string }
 }>) {
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale)) {
-    notFound()
-  }
-
-  // Providing all messages to the client
-  // side is the easiest way to get started
-  const messages = await getMessages()
-
   return (
-    <html lang={locale}>
+    <html>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-        <Analytics />
+        {children}
       </body>
     </html>
   )
