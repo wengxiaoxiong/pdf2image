@@ -55,7 +55,7 @@ export default function PDFToImageConverter() {
       'dropText': 'Drop your PDF here',
       'orClickToBrowse': 'or click to browse files',
       'selectPdfFile': 'Select PDF File',
-      'supportsPdf': 'Supports PDF files up to 50MB',
+      'supportsPdf': 'Supports PDF files up to 500MB',
       'converting': 'Converting your PDF to images...',
       'complete': 'complete',
       'conversionComplete': 'Conversion Complete',
@@ -74,7 +74,7 @@ export default function PDFToImageConverter() {
       'cancel': 'Cancel',
       'saveSettings': 'Save Settings',
       'errors.invalidPdf': 'Please select a valid PDF file.',
-      'errors.fileTooLarge': 'File size must be less than 50MB.',
+      'errors.fileTooLarge': 'File size must be less than 500MB.',
       'errors.conversionFailed': 'Failed to convert PDF. Please ensure the file is a valid PDF.',
       'errors.zipCreationFailed': 'Failed to create ZIP file. Please try downloading images individually.',
       'errors.ocrFailed': 'Text extraction failed, please try again',
@@ -190,8 +190,8 @@ export default function PDFToImageConverter() {
         return
       }
 
-      if (file.size > 50 * 1024 * 1024) {
-        // 50MB limit
+      if (file.size > 500 * 1024 * 1024) {
+        // 500MB limit
         setError(t('errors.fileTooLarge'))
         return
       }
